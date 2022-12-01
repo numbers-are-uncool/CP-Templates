@@ -1,9 +1,9 @@
 slay = list(map(int, input().split()))
-n = slay[0]
-m = slay[1]
-a = slay[2]
-b = slay[3]
-adj = {}
+n = slay[0] # nodes
+m = slay[1] # edges
+a = slay[2] # start node
+b = slay[3] # end node
+adj = {} # adjacency list
 for i in range(n + 1):
     adj[i] = []
 for i in range(m):
@@ -23,3 +23,4 @@ while len(q) > 0:
             dis[i] = dis[cur] + 1
             q.append(i)
 print(dis[b])
+# might be slow?? compared to the java equivalent it's slower :<
