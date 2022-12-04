@@ -1,10 +1,10 @@
 import java.io.*;
 import java.util.*;
-public class Segment_Tree_Test {
+public class Segment_Tree {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static StringTokenizer st;
-	static int a[];
-	static node seg[];
+	static int a[]; //array
+	static node seg[]; //segment tree
 	public static void main(String[] args) throws IOException {
 		int n = readInt(), m = readInt();
 		a = new int[n+1];
@@ -13,31 +13,10 @@ public class Segment_Tree_Test {
 			a[i] = readInt();
 		}
 		build(1, n, 1);
-		for(int q=0;q<m;q++) {
-			char c = next().charAt(0);
-			if(c == 'C') {
-				int x = readInt(), v = readInt();
-				update(x, v, 1);
-			}
-			else if(c == 'M') {
-				int l = readInt(), r = readInt();
-				System.out.println(minQuery(l, r, 1));
-			}
-			else if(c == 'G') {
-				int l = readInt(), r = readInt();
-				System.out.println(gcdQuery(l, r, 1));
-			}
-			else if(c == 'Q') {
-				int l = readInt(), r = readInt(), min = minQuery(l, r, 1), gcd = gcdQuery(l, r, 1);
-				if(min == gcd) {
-					System.out.println(freqQuery(l, r, 1));
-				}
-				else {
-					System.out.println(0);
-				}
-			}
-		}
+		//query & build after this point
+		//when querying, i = 1 at start
 	}
+	//query using recursion to find certain vals
 	static int freqQuery(int l, int r, int i) {
 		if(seg[i].left == l && seg[i].right == r) {
 			return seg[i].freq;
@@ -91,6 +70,7 @@ public class Segment_Tree_Test {
 			return Math.min(minQuery(l, m, 2*i), minQuery(m+1, r, 2*i+1));
 		}
 	}
+	//update segment tree
 	static void update(int pos, int v, int i) {
 		if(seg[i].left == seg[i].right) {
 			seg[i].min = v;
@@ -99,7 +79,7 @@ public class Segment_Tree_Test {
 			return;
 		}
 		int m = (seg[i].left+seg[i].right)/2;
-		if(pos <= m) {
+		if(pos <= m) { //going towards nodes that contain pos
 			update(pos, v, 2*i);
 		}
 		else {
@@ -119,17 +99,19 @@ public class Segment_Tree_Test {
 			seg[i].freq = seg[2*i].freq + seg[2*i+1].freq;
 		}
 	}
+	//builds segment tree
 	static void build(int l, int r, int i) {
 		seg[i] = new node(l, r, 0, 0, 0);
 		if(l == r) {
-			seg[i].min = a[l];
+			seg[i].min = a[l]; //leaf nodes
 			seg[i].gcd = a[l];
 			seg[i].freq = 1;
 			return;
 		}
 		int m = (l+r)/2;
-		build(l, m, 2*i);
+		build(l, m, 2*i); //recursion, going to lower nodes
 		build(m+1, r, 2*i+1);
+		//updating values derived from child nodes
 		seg[i].gcd = gcf(seg[2*i].gcd, seg[2*i+1].gcd);
 		if(seg[2*i].min < seg[2*i+1].min) {
 			seg[i].min = seg[2*i].min;
@@ -144,6 +126,7 @@ public class Segment_Tree_Test {
 			seg[i].freq = seg[2*i].freq + seg[2*i+1].freq;
 		}
 	}
+	//nodes
 	static class node {
 		int left, right, min, gcd, freq;
 		public node(int l, int r, int m, int g, int f) {
@@ -154,6 +137,7 @@ public class Segment_Tree_Test {
 			freq = f;
 		}
 	}
+	//greatest common factor
 	static int gcf(int a, int b) {
 		int r = 0;
 		while (true) {
