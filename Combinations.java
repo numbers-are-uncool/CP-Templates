@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Combination_Practice {
+public class Combination {
 	static int ctr = 0;
 	public static void main(String[] args) {
 		int a[] = { 52, 56, 32, 67 };
