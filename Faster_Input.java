@@ -1,47 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class Shop_and_Ship {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static StringTokenizer st;
-
+public class Faster_Input {
+	
 	public static void main(String[] args) throws IOException {
-		int n = readInt(), t = readInt();
-		long dis[] = new long[n + 1];
-		ArrayList<edge> adj[] = new ArrayList[n + 1];
-		for (int i = 1; i <= n; i++) {
-			adj[i] = new ArrayList<edge>();
-			dis[i] = Long.MAX_VALUE / 2;
-		}
-		for (int i = 0; i < t; i++) {
-			int x = readInt(), y = readInt(), z = readInt();
-			adj[x].add(new edge(y, z));
-			adj[y].add(new edge(x, z));
-		}
-		int k = readInt(), z[] = new int[k], p[] = new int[k];
-		for (int i = 0; i < k; i++) {
-			z[i] = readInt();
-			p[i] = readInt();
-		}
-		int d = readInt();
-		PriorityQueue<edge> pq = new PriorityQueue<edge>();
-		pq.add(new edge(d, 0));
-		dis[d] = 0;
-		while (!pq.isEmpty()) {
-			edge e = pq.poll();
-			int cur = e.v;
-			for (edge i : adj[cur]) {
-				if (dis[i.v] > e.w + i.w) {
-					dis[i.v] = e.w + i.w;
-					pq.add(new edge(i.v, dis[i.v]));
-				}
-			}
-		}
-		long ans = Long.MAX_VALUE / 2;
-		for (int i = 0; i < k; i++) {
-			ans = Math.min(ans, p[i] + dis[z[i]]);
-		}
-		System.out.println(ans);
+		//write code + input here
 	}
 
 	static class edge implements Comparable<edge> {
