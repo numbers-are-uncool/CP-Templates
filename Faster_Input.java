@@ -6,20 +6,7 @@ public class Faster_Input {
 	public static void main(String[] args) throws IOException {
 		//write code + input here
 	}
-
-	static class edge implements Comparable<edge> {
-		int v;
-		long w;
-
-		edge(int v0, long w0) {
-			v = v0;
-			w = w0;
-		}
-
-		public int compareTo(edge o) {
-			return Long.compare(w, o.w);
-		}
-	}
+	
 	final private static int BUFFER_SIZE = 1 << 16;
 	private static DataInputStream din = new DataInputStream(System.in);
 	private static byte[] buffer = new byte[BUFFER_SIZE];
